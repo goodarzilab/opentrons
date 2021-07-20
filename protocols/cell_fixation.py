@@ -25,9 +25,9 @@ pipette_tip_200 = 'opentrons_96_filtertiprack_200ul'
 #Well Numbering
 well_list = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10', 'A11', 'A12']
 #Plate slots
-plate_slot = [1, 4, 7, 10] #Based on number of plates to use per run, place plates in the slot number according to the order of this list.
+plate_slot_order = [1, 4, 7, 10] #Based on number of plates to use per run, place plates in the slot number according to the order of this list.
 #Tip slots
-tip_slots = [2, 3, 5, 6]
+tip_slot_order = [2, 3, 5, 6]
 
 def run(protocol: protocol_api.ProtocolContext):
     #Load Labware
@@ -36,9 +36,9 @@ def run(protocol: protocol_api.ProtocolContext):
     if test_mode: #If test_mode just use one box and reuse tips
         tr_200.append(protocol.load_labware(pipette_tip_200, 2))
     else:
-        for i in range(num_plates)
-            tr_200.append(protocol.load_labware(pipette_tip_200, tip_slots[i])) 
-            plate_list.append(protocol.load_labware(type_of_sample_plate, plate_slot[i]))
+        for i in range(num_plates):
+            tr_200.append(protocol.load_labware(pipette_tip_200, tip_slot_order[i])) 
+            plate_list.append(protocol.load_labware(type_of_sample_plate, plate_slot_order[i]))
 
     left_300_pipette = protocol.load_instrument('p300_multi_gen2', 'right', tip_racks = tr_200)
     fixation_trough = protocol.load_labware(type_of_reservoir_plate, '8') #Fixation Solution
@@ -87,7 +87,7 @@ def run(protocol: protocol_api.ProtocolContext):
                 sample_well = sample_plate[well_list[j]]
                 load_tips()
                 left_300_pipette.transfer(amount, fixation_trough.wells()[trough_num], sample_well)
-                mixing(70, 10, sample_well, 150, 400)
+                mixing(amount=70, rep=10, well=sample_well, aspirate_speed=150, dispense_speed=400)
                 discard_tips()
             num_transfers += 1
             
@@ -95,11 +95,11 @@ def run(protocol: protocol_api.ProtocolContext):
         while True:
             protocol.comment("Transfer and mix fixation solution")
             protocol.comment(" ")
-            transfer_fix(25)
+            transfer_fix(amount=25)
             protocol.pause('Switch plates') #Switch out plates and then press resume.
             protocol.comment(" ")
             
     else:
         protocol.comment("Transfer and mix fixation solution")
         protocol.comment(" ")
-        transfer_fix(25)
+        transfer_fix(amount=25)
