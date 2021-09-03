@@ -7,19 +7,19 @@ from common_methods import load_tips, discard_tips, eliminate_droplets, mixing
 metadata = {
     'protocolName': 'Cell Fixation',
     'author': 'J. Wang',
-    'description': 'Protocol for Cell Fixation',
+    'description': 'Protocol for Cell Resuspension',
     'apiLevel': '2.8'
 }
 
 #User Parameters: ONLY MAKE EDITS HERE
-parameters = {"test_mode" : True,
+parameters = {"test_mode" : False,
               "num_columns" : 1, #Number of columns per plate with cells
               "num_plates" : 1, #Number of plates used
-              "transfer_amount" : 25, #pfa amount to transfer in ul
-              "mix_amount" : 70, #amount to pipette during mixing in ul
+              "transfer_amount" : 100, #Liquid amount to resuspend
+              "mix_amount" : 85, #amount to pipette during mixing in ul
               "mix_rep" : 10, #number of mixing steps
-              "mix_aspirate_speed" : 150,
-              "mix_dispense_speed" : 400
+              "mix_aspirate_speed" : 50,
+              "mix_dispense_speed" : 450
              }
 
 #Labware Parameters

@@ -37,7 +37,7 @@ def mixing(pipette, amount, rep, well, aspirate_speed=150, dispense_speed=300): 
     pipette.flow_rate.aspirate = aspirate_speed
     pipette.flow_rate.dispense = dispense_speed
     loc1 = well.bottom().move(types.Point(x=1, y =0, z=.6))
-    loc2 = well.bottom().move(types.Point(x=1, y =0, z=3.6))
+    loc2 = well.bottom().move(types.Point(x=1, y =0, z=2.6))
     for i in range(rep):
         pipette.aspirate(amount, loc1)
         pipette.dispense(amount,loc2)
