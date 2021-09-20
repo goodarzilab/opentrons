@@ -13,7 +13,7 @@ metadata = {
 
 #User Parameters: ONLY MAKE EDITS HERE
 parameters = {"test_mode" : True,
-              "num_columns" : 1, #Number of columns per plate with cells
+              "num_columns" : 12, #Number of columns per plate with cells
               "num_plates" : 1, #Number of plates used
               "transfer_amount" : 25, #pfa amount to transfer in ul
               "mix_amount" : 70, #amount to pipette during mixing in ul
@@ -29,7 +29,7 @@ lab_params = {"type_of_sample_plate" : "nest_96_wellplate_100ul_pcr_full_skirt",
               "reservoir_slot" : 3, 
               "pipette_tip_200" : "opentrons_96_filtertiprack_200ul",
               "pipette_type" : "p300_multi_gen2",
-              "tip_slot_order" : [5, 6, 8, 9, 11], #Based on number of plates to use per run, place tips in the slot number according to the order of this list.
+              "tip_slot_order" : [5, 6, 8, 9, 11] #Based on number of plates to use per run, place tips in the slot number according to the order of this list.
               "well_list" : ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10', 'A11', 'A12'],
              }
     
@@ -37,7 +37,7 @@ def run(protocol: protocol_api.ProtocolContext):
     #Load user parameters
     test_mode, num_columns, num_plates = parameters["test_mode"], parameters["num_columns"], parameters["num_plates"]
     transfer_amount, mix_amount, mix_rep = parameters["transfer_amount"], parameters["mix_amount"], parameters["mix_rep"]
-    mix_aspirate_speed, mix_dispense_speed = parameters["mix_aspirate_speed"], parameters["mix_dispense_speed"]
+    mix_aspirate_speed, mix_dispense_speed = paramters["mix_aspirate_speed"], parameters["mix_dispense_speed"]
     
     #Load labware parameters
     type_of_sample_plate, plate_slot_order = lab_params["type_of_sample_plate"], lab_params["plate_slot_order"]
